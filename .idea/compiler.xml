@@ -25,5 +25,8 @@
         <module name="spring-data-rest-angular" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="spring-data-rest-angular" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>

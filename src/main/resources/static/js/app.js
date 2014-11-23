@@ -2,9 +2,30 @@
  * Created by seanlivingston on 11/22/14.
  */
 
-var studentsModule = angular.module('universityApp');
+var app = angular.module('universityApp');
 
-studentsModule.controller('studentsController', function($scope, $http) {
+app.config(function ($stateProvider, $urlRouterProvider) {
+    $urlRouterProvider.otherwise("home");
+
+    $stateProvider
+        .state('home', {
+            url:'/home',
+            templateUrl: URLS.index,
+            controller: 'StudentsController'
+        })
+        .state('edit', {
+            url:'/edit/:id',
+            templateUrl: URLS.studentEdit,
+            controller: 'StudentEdit'
+        })
+        .state('create', {
+            url:'/create',
+            templateUrl: URLS.studentCreate,
+            controller: 'StudentCreate'
+        });
+});
+
+app.controller('StudentsController', function($scope, $http) {
 
     var urlBase="";
     function findAllStudents () {
