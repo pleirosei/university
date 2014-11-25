@@ -1,8 +1,12 @@
 package com.university.students;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.List;
 
 /**
  * Created by seanlivingston on 11/24/14.
@@ -14,8 +18,33 @@ public class RestStudentController {
 
     @Autowired
     public RestStudentController (StudentRepository studentRepository) {
-        return this.studentRepository = studentRepository;
+        this.studentRepository = studentRepository;
     }
 
+    @RequestMapping(method = RequestMethod.POST)
+    public Student create(@RequestBody @Valid Student student) {
+        return this.studentRepository.save(student);
+    }
+
+    @RequestMapping(method = RequestMethod.GET)
+    public List<Student> list() {
+        return this.studentRepository.findAll();
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public Student get(@PathVariable("id") Integer id) {
+        return this.studentRepository.findOne(id);
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    public Student update(@PathVariable("id") Integer id, @RequestBody @Valid Student student) {
+        return studentRepository.save(student);
+    }
+
+    @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<Boolean> delete(@PathVariable("id") Integer id) {
+        this.studentRepository.delete(id);
+        return new ResponseEntity<Boolean>(Boolean.TRUE, HttpStatus.OK);
+    }
 
 }

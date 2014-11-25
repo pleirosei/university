@@ -1,6 +1,7 @@
 package com.university.students;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("")
 public class StudentController {
     @RequestMapping("/home")
-    public String home() {
+    public String list(Model model) {
         return "index";
     }
 }
