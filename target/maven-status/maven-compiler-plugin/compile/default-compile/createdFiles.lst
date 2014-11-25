@@ -1,4 +1,4 @@
-com/univeristy/students/Application.class
-com/univeristy/students/StudentRepository.class
-com/univeristy/students/Student.class
-com/univeristy/students/StudentController.class
+com/university/students/Student.class
+com/university/students/StudentController.class
+com/university/students/Application.class
+com/university/students/StudentRepository.class
