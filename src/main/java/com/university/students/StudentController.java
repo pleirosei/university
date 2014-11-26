@@ -12,6 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class StudentController {
     @RequestMapping("/university")
     public String list(Model model) {
-        return "index";
+        return "students/home";
     }
 }
