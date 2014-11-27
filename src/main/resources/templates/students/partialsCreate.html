@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" layout:decorator="layout/sitelayout">
+<head>
+    <title th:text="#{app.name}">List of Students</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" th:href="@{/css/application.css}" href="./css/application.css"/>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <h1 class="well well-small">Students</h1>
+        </div>
+    </div>
+    <div th:fragment="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label for="name" class="col-xs-2">First Name</label>
+
+                        <div class="col-xs-6">
+                            <input class="form-control" placeholder="First Name" ng-model="student.firstName"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="address" class="col-xs-2">Last Name</label>
+
+                        <div class="col-xs-6">
+                            <input class="form-control" placeholder="Last Name" ng-model="student.lastName"/>
+                        </div>
+                    </div>
+                    <a class="btn btn-default" ng-click="createStudent()">Submit</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
