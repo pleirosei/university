@@ -13,6 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class StudentController {
     @RequestMapping(method = RequestMethod.GET)
     public String list(Model model) {
-        return "students/index";
+        return "index";
     }
 }
