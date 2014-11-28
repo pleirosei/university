@@ -10,7 +10,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import java.util.List;
 
 @RepositoryRestResource
-public interface StudentRepository extends CrudRepository<Student, Integer> {
+public interface StudentRepository extends CrudRepository<Student, Long> {
 
     @Override
     List<Student> findAll();

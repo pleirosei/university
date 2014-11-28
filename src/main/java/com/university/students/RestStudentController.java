@@ -16,7 +16,7 @@ import java.util.List;
  * Created by seanlivingston on 11/24/14.
  */
 @RestController
-@RequestMapping("/university/students")
+@RequestMapping("/students")
 public class RestStudentController {
     private StudentRepository studentRepository;
 
@@ -36,17 +36,17 @@ public class RestStudentController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public Student get(@PathVariable("id") Integer id) {
+    public Student get(@PathVariable("id") long id) {
         return this.studentRepository.findOne(id);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public Student update(@PathVariable("id") Integer id, @RequestBody @Valid Student student) {
+    public Student update(@PathVariable("id") long id, @RequestBody @Valid Student student) {
         return studentRepository.save(student);
     }
 
     @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<Boolean> delete(@PathVariable("id") Integer id) {
+    public ResponseEntity<Boolean> delete(@PathVariable("id") long id) {
         this.studentRepository.delete(id);
         return new ResponseEntity<Boolean>(Boolean.TRUE, HttpStatus.OK);
     }

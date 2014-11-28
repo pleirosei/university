@@ -1,76 +1,12 @@
 /**
- * Created by seanlivingston on 11/22/14.
+ *
+ * Created by seanlivingston on 11/27/14.
  */
 
-
-var app = angular.module('universityApp', ["ui.router", "ngResource"]);
-
-app.config(function ($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise("home");
-
-    $stateProvider
-        .state('home', {
-            url:'/home',
-            templateUrl: URLS.partialsList,
-            controller: 'StudentController'
-        })
-        .state('edit', {
-            url:'/edit/:id',
-            templateUrl: URLS.partialsEdit,
-            contorller: 'StudentEditController'
-        })
-        .state('create', {
-            url:'/create',
-            templateURL: URLS.partialsCreate,
-            controller: 'StudentController'
-        });
-});
-
-app.factory("Student", function ($resource) {
-    return $resource(URLS.students, {id: "@id"}, {
-        update: {
-            method: 'PUT'
-        }
-    });
-});
-
-app.controller("StudentController", function ($scope, Student, $state) {
-    function init() {
-        $scope.getStudents();
-    }
-
-    $scope.getStudents = function () {
-        $scope.students = Student.query();
-    };
-
-    $scope.deleteStudent = function (student) {
-        return student.$delete({}, function () {
-            $scope.students.splice($scope.students.indexOf(student), 1);
-        });
-    };
-
-    $scope.createStudent = function () {
-        var student = new Student($scope.student);
-        student.$save({}, function () {
-            $state.transitionTo("home");
-        });
-    };
-
-    init();
-});
-
-app.controller("StudentEditController", function ($scope, Student, $state, $stateParams) {
-    function init() {
-        $scope.student = Student.get({id: $stateParams.id})
-    }
-
-    $scope.updateStudent = function () {
-        var student = new Student($scope.student);
-        student.$update().then(function () {
-            $state.transitionTo("home");
-        });
-    }
-
-    init();
-
-});
+angular.module('StudentsApp', ['Students.filters', 'Students.services', 'Students.directives', 'Students.controllers']).
+    config(['$routeProvider', function ($routeProvider) {
+        $routeProvider.when('/student-list', {templateUrl: 'students/student-list.html', controller: 'StudentListCtrl'});
+        $routeProvider.when('/Student-detail/:id', {templateUrl: 'students/student-detail.html', controller: 'StudentDetailCtrl'});
+        $routeProvider.when('/student-creation', {templateUrl: 'students/student-creation.html', controller: 'StudentCreationCtrl'});
+        $routeProvider.otherwise({redirectTo: '/student-list'});
+    }])
